@@ -1,18 +1,15 @@
 E-Commerce MVC Project 🛒
-<div align="center">
 
-
-</div>
 📋 Table of Contents
-Overview
-Features
-Technologies Used
-Getting Started
-Prerequisites
-Installation
-Localization
-Contributing
-License
+  Overview
+  Features
+  Technologies Used
+  Getting Started
+  Prerequisites
+  Installation
+  Localization
+  Contributing
+  License
 Contact
 📖 Overview
 Welcome to the E-Commerce MVC Project! This is a comprehensive e-commerce application built using ASP.NET MVC. It includes all the essential features needed for an online store and supports localization with Bangla as an additional language.
@@ -42,7 +39,7 @@ Clone the repository:
 
 sh
 Copy code
-git clone https://github.com/yourusername/ecommerce-mvc.git
+git clone https://github.com/xisxus/Mvc_ECommerce_Project
 Open the project in Visual Studio:
 
 Open the ecommerce-mvc.sln file in Visual Studio.
@@ -69,4 +66,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the MIT License.
 
 📧 Contact
-If you have any questions or suggestions, feel free to reach out to me at [your-email@example.com].
+If you have any questions or suggestions, feel free to reach out to me at shefain3@gmail.com.
