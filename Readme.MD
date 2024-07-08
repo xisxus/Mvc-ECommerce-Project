@@ -41,6 +41,7 @@ Welcome to the E-Commerce MVC Project! This is a comprehensive e-commerce applic
 ### Installation
 1. Clone the repository:
 
+git clone https://github.com/xisxus/Mvc_ECommerce_Project
 
 2. Open the project in Visual Studio:
 - Open the `ecommerce-mvc.sln` file in Visual Studio.
