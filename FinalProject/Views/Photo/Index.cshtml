@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FinalProject.Models.Photo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml"; // Assuming you have a shared layout that includes Bootstrap
+}
+
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <h2>Photo Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@Url.Content(item.ImagePath)" alt="Photo Image" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Are you sure you want to delete this photo?');" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

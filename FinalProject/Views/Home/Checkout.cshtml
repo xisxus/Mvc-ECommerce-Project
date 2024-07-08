@@ -1,0 +1,272 @@
+﻿@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>@FinalProject.Resources.Resource1.HomeSlider1Subtitle</p>
+                    <h1>@FinalProject.Resources.Resource1.Cart</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- cart -->
+<div class="cart-section mt-150 mb-150">
+    @if (TempData["total"] == null || (TempData["cart"] as List<FinalProject.Models.Cart>)?.Count == 0)
+    {
+        <h1>
+            @FinalProject.Resources.Resource1.CartIsEmpty
+        </h1>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+            @FinalProject.Resources.Resource1.GoBack
+        </a>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <h3>Total Item: @TempData["item_count"]</h3>
+                    <div class="cart-table-wrap">
+                        <table class="cart-table">
+                            <thead class="cart-table-head">
+                                <tr class="table-head-row">
+                                    <th class="product-remove"></th>
+                                    <th class="product-id">Product ID</th>
+                                    <th class="product-name">Name</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["cart"] is List<FinalProject.Models.Cart> cartItems)
+                                {
+                                    foreach (var item in cartItems)
+                                    {
+                                        <tr class="table-body-row">
+                                            <td class="product-remove">
+                                                <a href="@Url.Action("remove", "Home", new { id = item.proid })" class="btn btn-danger btn-sm">
+                                                    <i class="far fa-window-close"></i>
+                                                </a>
+                                            </td>
+                                            <td class="product-id">@item.proid</td>
+                                            <td class="product-name">@item.proname</td>
+                                            <td class="product-price">$@item.price.ToString("F2")</td>
+                                            <td class="product-quantity">
+                                                <div class="quantity">
+                                                    <button class="btn btn-sm btn-outline-secondary btn-decrease" data-id="@item.proid">-</button>
+                                                    <input type="text" class="quantity-input" data-id="@item.proid" value="@item.qty" readonly />
+                                                    <button class="btn btn-sm btn-outline-secondary btn-increase" data-id="@item.proid">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="product-total" data-id="@item.proid">$@item.bill.ToString("F2")</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="total-section">
+                        <table class="total-table">
+                            <thead class="total-table-head">
+                                <tr class="table-total-row">
+                                    <th>Total</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            @{
+                                decimal total = TempData["total"] != null ? Convert.ToDecimal(TempData["total"]) : 0;
+                            }
+
+                            <tbody>
+                                <tr class="total-data">
+                                    <td>
+                                        <strong>
+                                            @FinalProject.Resources.Resource1.Subtotal
+                                            :
+                                        </strong>
+                                    </td>
+                                    <td id="subtotal">$@total.ToString("F2")</td>
+                                </tr>
+                                <tr class="total-data">
+                                    <td>
+                                        <strong>
+                                            @FinalProject.Resources.Resource1.Shipping :
+                                        </strong>
+                                    </td>
+                                    <td id="shipping-charge">$100.00</td>
+                                </tr>
+                                <tr class="total-data">
+                                    <td>
+                                        <strong>
+                                            @FinalProject.Resources.Resource1.Total :
+                                        </strong>
+                                    </td>
+                                    <td id="total-with-shipping">$@(total + 100).ToString("F2")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
+                        @FinalProject.Resources.Resource1.Login
+                    </a>
+                    <a href="@Url.Action("Register", "Account")" class="btn btn-secondary">
+                        @FinalProject.Resources.Resource1.Register
+                    </a>
+                }
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("2") && TempData["cart"] != null)
+                {
+                    using (Html.BeginForm("Checkout", "Home", FormMethod.Post, new { @class = "checkout-form" }))
+                    {
+                        <div class="form-group">
+                            <label for="contact">@FinalProject.Resources.Resource1.PhoneNumberLabel</label>
+                            <input type="text" name="contact" class="form-control" placeholder="Enter your contact number" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">@FinalProject.Resources.Resource1.Address</label>
+                            <textarea name="address" class="form-control" placeholder="Enter your address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery">
+                                @FinalProject.Resources.Resource1.DeliveryOption
+                            </label>
+                            <select name="shipping" id="delivery" class="form-control" required onchange="updateShippingCharge()">
+                                <option value="45">
+                                    @FinalProject.Resources.Resource1.InsideDhaka
+                                </option>
+                                <option value="100">
+                                    @FinalProject.Resources.Resource1.OutsideDhaka
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">@FinalProject.Resources.Resource1.Checkout</button>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+<!-- end cart -->
+<script src="~/Scripts/jquery-3.7.1.js"></script>
+
+<script>
+// Function to update quantity and total dynamically
+function updateQuantity(productId, newQuantity) {
+    var cartItems = JSON.parse('@Html.Raw(Json.Encode(TempData["cart"]))');
+
+    // Find the item in the cart
+    var itemToUpdate = cartItems.find(function(item) {
+        return item.proid === productId;
+    });
+    if (itemToUpdate) {
+        itemToUpdate.qty = newQuantity;
+        itemToUpdate.bill = itemToUpdate.qty * itemToUpdate.price;
+    }
+
+    // Update the UI
+    var quantityInput = document.querySelector('.quantity-input[data-id="' + productId + '"]');
+    if (quantityInput) {
+        quantityInput.value = newQuantity;
+    }
+    var productTotal = document.querySelector('.product-total[data-id="' + productId + '"]');
+    if (productTotal) {
+        productTotal.textContent = '$' + itemToUpdate.bill.toFixed(2);
+    }
+
+    // Update subtotal
+    var subtotal = cartItems.reduce(function(acc, curr) {
+        return acc + curr.bill;
+    }, 0);
+    var subtotalElement = document.getElementById('subtotal');
+    if (subtotalElement) {
+        subtotalElement.textContent = '$' + subtotal.toFixed(2);
+    }
+
+    // Update total with shipping
+    updateTotalWithShipping(subtotal);
+
+    // Save updated cart to TempData
+    saveCartToTempData(cartItems);
+}
+
+function updateTotalWithShipping(subtotal) {
+    var shippingCharge = parseFloat(document.getElementById('shipping-charge').textContent.replace('$', ''));
+    var totalWithShipping = subtotal + shippingCharge;
+    document.getElementById('total-with-shipping').textContent = '$' + totalWithShipping.toFixed(2);
+}
+
+// Function to save updated cart to TempData
+function saveCartToTempData(cartItems) {
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("UpdateCart", "Home")',
+        data: JSON.stringify(cartItems),
+        contentType: "application/json",
+        success: function(response) {
+            console.log("Cart updated successfully");
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating cart: " + error);
+        }
+    });
+}
+
+// Event listeners for increase and decrease buttons
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-decrease') || e.target.classList.contains('btn-increase')) {
+        var productId = parseInt(e.target.getAttribute('data-id'));
+        var quantityInput = document.querySelector('.quantity-input[data-id="' + productId + '"]');
+        var currentQuantity = parseInt(quantityInput.value);
+        var newQuantity = e.target.classList.contains('btn-decrease') ? currentQuantity - 1 : currentQuantity + 1;
+
+        if (newQuantity > 0) {
+            updateQuantity(productId, newQuantity);
+        }
+    }
+});
+
+// Function to update shipping charge
+function updateShippingCharge() {
+    var shippingSelect = document.getElementById('delivery');
+    var shippingCharge = parseFloat(shippingSelect.value);
+    document.getElementById('shipping-charge').textContent = '$' + shippingCharge.toFixed(2);
+
+    var subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('$', ''));
+    updateTotalWithShipping(subtotal);
+}
+
+// Add event listener for shipping select
+document.getElementById('delivery').addEventListener('change', updateShippingCharge);
+
+// Initial call to set correct shipping charge
+updateShippingCharge();
+</script>
+
+<style>
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+</style>

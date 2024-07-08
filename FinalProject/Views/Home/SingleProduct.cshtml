@@ -1,0 +1,88 @@
+﻿@model FinalProject.Models.Product
+<br />
+<br />
+<br />
+<br />
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>
+                        @FinalProject.Resources.Resource1.SeeMoreDetails
+                                    </p>
+                    <h1>
+                        @FinalProject.Resources.Resource1.SingleProduct
+                                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- single product -->
+
+
+<div style="margin-bottom: 10px; margin-top : 85px">
+    @Html.Action("DisplayPhoto", "Photo", new { tittle = "SingleProduct" })
+
+</div>
+
+
+<div class="single-product mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                @using (Html.BeginForm())
+                {
+                    <input type="hidden" name="id" value="@Model.ProductId" />
+                    <div class="single-product-img">
+                        <img src="~/Uploads/@Model.Image" alt="">
+                    </div>
+                }
+            </div> <!-- End of col-md-5 -->
+
+            <div class="col-md-7">
+                @using (Html.BeginForm())
+                {
+                    <div class="single-product-content">
+                        <h3>@Model.Name</h3>
+                        <p class="single-product-pricing"><span>
+    @FinalProject.Resources.Resource1.PerKg
+                    </span> @Model.FinalRate</p>
+                        <p>@Model.Description</p>
+                        <div class="single-product-form">
+                            <p><strong>
+    @FinalProject.Resources.Resource1.Categories
+                            :
+                        </strong>@Model.Category.Name</p>
+                            <input type="number" min="1" max="10" name="qty" value="1" />
+                            <input type="submit" value="@FinalProject.Resources.Resource1.AddToCart
+" class="btn btn-warning" />
+                        </div>
+
+                        <h4>
+                            @FinalProject.Resources.Resource1.Share
+                                                :
+                                            </h4>
+                        <ul class="product-share">
+                            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                }
+            </div> <!-- End of col-md-7 -->
+        </div> <!-- End of row -->
+    </div> <!-- End of container -->
+</div> <!-- End of single product -->
+
+
+<style>
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+</style>

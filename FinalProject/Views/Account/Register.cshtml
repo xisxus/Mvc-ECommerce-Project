@@ -1,0 +1,148 @@
+﻿@model FinalProject.Models.User
+
+<br />
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+
+
+
+
+        <div class="row justify-content-center align-items-center">
+
+
+
+            <div class="col-lg-8">
+
+                <h2>
+                    @FinalProject.Resources.Resource1.PageTitle
+                </h2>
+
+                <h3 style="color:red;">@TempData["msg"]</h3>
+
+                <form class="bg-white p-5 contact-form">
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.FirstNameLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @id = "firstName" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.LastNameLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @id = "lastName" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.EmailLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.PhoneNumberLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @id = "phoneNumber" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.PasswordLabel
+                        </span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.ConfirmPasswordLabel
+                        </span>
+                        <input type="password" class="form-control" id="confirmPassword" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.DateOfBirthLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @id = "dateOfBirth" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.AddressLabel
+                        </span>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "address" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" />
+                            <label class="form-check-label" for="terms">
+                                @FinalProject.Resources.Resource1.TermsLabel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input type="submit" value="@FinalProject.Resources.Resource1.RegisterButton" class="btn btn-primary py-3 px-5" id="registerButton" disabled>
+                    </div>
+                </form>
+
+
+                <div class="text-center mt-3">
+                    <p>
+                        @FinalProject.Resources.Resource1.RegisterPrompt1
+                        <a href="@Url.Action("Login", "Account")">
+                            @FinalProject.Resources.Resource1.LoginLinkText
+                        </a>
+                    </p>
+                </div>
+
+
+                @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const email = document.getElementById('email');
+        const phoneNumber = document.getElementById('phoneNumber');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const dateOfBirth = document.getElementById('dateOfBirth');
+        const address = document.getElementById('address');
+        const terms = document.getElementById('terms');
+        const registerButton = document.getElementById('registerButton');
+
+        function validateForm() {
+            const isFormValid = firstName.value && lastName.value && email.value && phoneNumber.value && password.value && confirmPassword.value && dateOfBirth.value && address.value && terms.checked;
+            registerButton.disabled = !isFormValid;
+        }
+
+        function validatePasswords() {
+            const passwordsMatch = password.value === confirmPassword.value;
+            confirmPassword.setCustomValidity(passwordsMatch ? '' : 'Passwords do not match');
+        }
+
+        firstName.addEventListener('input', validateForm);
+        lastName.addEventListener('input', validateForm);
+        email.addEventListener('input', validateForm);
+        phoneNumber.addEventListener('input', validateForm);
+        password.addEventListener('input', validateForm);
+        confirmPassword.addEventListener('input', validateForm);
+        confirmPassword.addEventListener('input', validatePasswords);
+        dateOfBirth.addEventListener('input', validateForm);
+        address.addEventListener('input', validateForm);
+        terms.addEventListener('change', validateForm);
+        password.addEventListener('input', validatePasswords);
+    });
+</script>

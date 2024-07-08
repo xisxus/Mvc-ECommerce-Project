@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+<br />
+<br />
+<br />
+<br />
+<h2 class="text-center my-4">Admin Dashboard</h2>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-8 justify-content-center">
+            <a  href="@Url.Action("Index", "Home")" class="btn btn-primary ">Go To Website</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-list-alt fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">Manage categories of products</p>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("Create", "Category")">Add Category</a>
+                    <a class="btn btn-secondary btn-block" href="@Url.Action("Index", "Category")">View Categories</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-box-open fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Products</h5>
+                    <p class="card-text">Manage products in the inventory</p>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("Create", "Products")">Add Product</a>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("Index", "Products")">View All Products</a>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("AllProduct", "Products")">Shop Page</a>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("SingleProduct", "Home", new { id = 1 })">Single Product Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Pages</h5>
+                    <p class="card-text">Navigate to various pages</p>
+
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("Index", "Home")">Home</a>
+
+
+                    <a class="btn btn-secondary btn-block" href="@Url.Action("Invoice", "Home", new { id = 2 })">Invoices Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-image fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Banner</h5>
+                    <p class="card-text">Manage website banners</p>
+                    <a class="btn btn-secondary btn-block" href="@Url.Action("Index", "Photo")">Banner</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-shopping-cart fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Orders</h5>
+                    <p class="card-text">Manage orders</p>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("GetAllOrderDetail", "Home")"> All Orders</a>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("OrderDetail", "Home", new { id = 2 })">Order Detail Page</a>
+                    <a class="btn btn-secondary btn-block mb-2" href="@Url.Action("Checkout", "Home")">Checkout Page</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">Manage users</p>
+                    <a class="btn btn-secondary btn-block" href="@Url.Action("GetAllUser", "Home")">All Users</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Include FontAwesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+
+
+
+</style>

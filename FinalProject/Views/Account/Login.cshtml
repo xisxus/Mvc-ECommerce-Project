@@ -1,0 +1,61 @@
+﻿@model FinalProject.Models.User
+
+<br />
+<br />
+<br />
+<br />
+
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <h2 class="text-center">
+                    @FinalProject.Resources.Resource1.LoginButton
+                </h2>
+
+                <form class="bg-white p-5 contact-form">
+                    <div class="form-group">
+                        <span>
+                            @FinalProject.Resources.Resource1.EmailLabel
+
+                        </span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <span>
+                            @FinalProject.Resources.Resource1.PasswordLabel
+                        </span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="@FinalProject.Resources.Resource1.LoginLinkText" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
+
+                <h3 style="color:red;">@TempData["msg"]</h3>
+
+
+                <div class="text-center mt-3">
+                    <p>
+                        @FinalProject.Resources.Resource1.RegisterPrompt
+                        <a href="@Url.Action("Register", "Account")">
+                            @FinalProject.Resources.Resource1.RegisterLinkText
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+        </div>
+    </div>
+}
+
+<style>
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+</style>

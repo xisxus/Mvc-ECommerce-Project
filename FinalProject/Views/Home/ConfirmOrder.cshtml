@@ -1,0 +1,88 @@
+﻿@model FinalProject.Models.ViewModel.OrderUserVM
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            @using (Html.BeginForm("ConfirmOrder", "Home", FormMethod.Post, new { id = "orderForm" }))
+            {
+                @Html.HiddenFor(model => model.InvoiceId)
+                @Html.HiddenFor(model => model.Email, new { id = "customerEmail" })
+
+                <div class="form-group">
+                    <label>User Name:</label>
+                    @Html.DisplayFor(model => model.Name, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    @Html.DisplayFor(model => model.Email, new { @class = "form-control", id = "displayEmail" })
+                </div>
+
+                <div class="form-group">
+                    <label>Payment:</label>
+                    @Html.DisplayFor(model => model.Payment, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Bill:</label>
+                    @Html.DisplayFor(model => model.Bill, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Invoice Date:</label>
+                    @Html.DisplayFor(model => model.InvoiceDate, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Address:</label>
+                    @Html.DisplayFor(model => model.Address, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Shipping :</label>
+                    @Html.DisplayFor(model => model.DeliveryCharge, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>TotalBill:</label>
+                    @Html.DisplayFor(model => model.TotalBill, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="submit" value="Confirm & Notify" onclick="openGmail()" class="btn btn-success mr-2">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Cancel</a>
+                </div>
+                 <div class="form-group mb-4">
+                     <h6>By Clicking Confirm It Will Open Gmail Window in Another Tab</h6>
+                 </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function openGmail() {
+        var customerEmail = document.getElementById('customerEmail').value;
+        var subject = "Confirmation of Order #" + "@Model.InvoiceId";
+        var body = "Dear Customer,\n\nThank you for placing your order with us.\n\nOrder details:\n\n" +
+                   "Payment Method: " + "@Model.Payment" + "\n" +
+                   "Total Amount: " + "@Model.TotalBill" + "\n" +
+                   "\nPlease confirm if you have any questions or need further assistance.\n\nBest regards,\nIDB-Bisew Ltd";
+
+        var mailToLink = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(customerEmail) +
+                         "&su=" + encodeURIComponent(subject) +
+                         "&body=" + encodeURIComponent(body);
+
+        window.open(mailToLink, '_blank');
+    }
+</script>
+
+<style>
+    .top-header-area {
+        background-color: #ffa500;
+        padding: 15px 0;
+    }
+</style>

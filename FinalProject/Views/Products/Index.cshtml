@@ -1,0 +1,84 @@
+﻿@model IEnumerable<FinalProject.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<br />
+<br />
+<br />
+<br />
+
+
+<div class="container mt-4">
+    <h2 class="mb-4">View Products</h2>
+
+    @*<div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Search Here" id="searchBox" />
+        </div>
+    </div>*@
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>FinalPrice</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td>@item.Name</td>
+                        <td>@item.Category.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.Unit</td>
+                        <td>@item.Discount</td>
+                        <td>@item.FinalRate</td>
+                        <td><img src="~/Uploads/@item.Image" style="max-width: 150px; height: auto;" class="img-thumbnail" /></td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Products", new { id = item.ProductId })" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="@Url.Action("Delete", "Products", new { id = item.ProductId })" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#searchBox").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+}
+
+
+<style>
+    .top-header-area {
+        background-color: #ffa500; /* Orange background color */
+        padding: 15px 0; /* Adjust padding as needed */
+    }
+</style>

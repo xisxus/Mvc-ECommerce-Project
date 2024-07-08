@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>@ViewBag.tittle </title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+    <link href="~/Content/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/meanmenu.min.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="@Url.Action("Index","Home")">
+                                <img src="~/img/logo.png" />
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+
+
+
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+
+                                    <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">@FinalProject.Resources.Resource1.Home</a></li>
+                                    <li class="nav-item active"><a href="@Url.Action("AllProduct","Products")" class="nav-link">@FinalProject.Resources.Resource1.Product</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Login","Account")" class="nav-link">@FinalProject.Resources.Resource1.Login</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Register", "Account")" class="nav-link">@FinalProject.Resources.Resource1.Register</a></li>
+                                    <li>
+                                        <div class="header-icons">
+                                            <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                        </div>
+                                    </li>
+                                    if (TempData["cart"] != null)
+                                    {
+                                        TempData.Keep();
+                                        <li class="nav-item cta cta-colored"><a href="@Url.Action("Checkout","Home")" class="nav-link"><span class="fas fa-shopping-cart"></span>[@TempData["item_count"]]</a></li>
+                                    }
+
+                                }
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+                                    if (User.IsInRole("1"))
+                                    {
+
+                                        <li class="nav-item "><span class="nav-link" style="color: white">@FinalProject.Resources.Resource1.Welcome @Session["User"]</span></li>
+
+
+
+                                        <li class="nav-item"><a href="@Url.Action("AdminNavigation", "Home")" class="nav-link">@FinalProject.Resources.Resource1.Dashboard</a></li>
+
+                                        <li class="nav-item"><a href="@Url.Action("Signout","Account")" class="nav-link">@FinalProject.Resources.Resource1.Logout</a></li>
+                                    }
+                                    if (User.IsInRole("2"))
+                                    {
+                                        <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">@FinalProject.Resources.Resource1.Home</a></li>
+                                        <li class="nav-item "><span class="nav-link" style="color: white">@FinalProject.Resources.Resource1.Welcome @Session["User"]</span></li>
+                                        <li class="nav-item active"><a href="@Url.Action("AllProduct","Products")" class="nav-link">@FinalProject.Resources.Resource1.Product</a></li>
+                                        <li class="nav-item"><a href="@Url.Action("OrderDetail", "Home", new { id = @Session["uid"] })" class="nav-link">@FinalProject.Resources.Resource1.Orders</a></li>
+
+                                        if (TempData["cart"] != null)
+                                        {
+                                            TempData.Keep();
+                                            <li class="nav-item cta cta-colored">
+                                                <a href="@Url.Action("Checkout", "Home")" class="nav-link">
+                                                    <span><i class="fas fa-shopping-cart"></i></span>
+                                                    @TempData["item_count"]
+                                                </a>
+                                            </li>
+
+
+
+                                        }
+
+                                        <li class="nav-item"><a href="@Url.Action("Signout","Account")" class="nav-link">@FinalProject.Resources.Resource1.Logout</a></li>
+                                    }
+                                }
+
+                                
+
+                                <li>
+                                    <a href="#">@FinalProject.Resources.Resource1.ChangeLanguage</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="@Url.Action("Change", "Language", new { LanguageAbbrevation = "en" , returnUrl = Request.RawUrl })">English</a></li>
+                                        <li><a href="@Url.Action("Change", "Language", new { LanguageAbbrevation = "bn" , returnUrl = Request.RawUrl })">Bangla</a></li>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>@FinalProject.Resources.Resource1.SearchFor</h3>
+
+
+                            <form method="get" action="@Url.Action("AllProduct", "Products")">
+                                <input type="text" name="searchQuery" placeholder="Search Here" value="@Request.QueryString["searchQuery"]" />
+                                <button type="submit">@FinalProject.Resources.Resource1.Search <i class="fas fa-search"></i></button>
+                            </form>
+
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search area -->
+
+
+
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+
+
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p>
+                        @FinalProject.Resources.Resource1.Copyrights © - <a href="https://shefain.taplink.ws/">@FinalProject.Resources.Resource1.Shefain</a>,  @FinalProject.Resources.Resource1.Reserved.
+                    </p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/js/form-validate.js"></script>
+    <script src="~/Scripts/js/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/js/jquery.countdown.js"></script>
+    <script src="~/Scripts/js/jquery.isotope-3.0.6.min.js"></script>
+    <script src="~/Scripts/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/js/jquery.meanmenu.min.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/sticker.js"></script>
+    <script src="~/Scripts/js/waypoints.js"></script>
+</body>
+</html>
