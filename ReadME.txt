@@ -1,6 +1,6 @@
-E-Commerce MVC Project 🛒
+# E-Commerce MVC Project 🛒
 
-📋 Table of Contents
+# 📋 Table of Contents
   Overview
   Features
   Technologies Used
@@ -10,11 +10,12 @@ E-Commerce MVC Project 🛒
   Localization
   Contributing
   License
-Contact
-📖 Overview
+  Contact
+
+# 📖 Overview
 Welcome to the E-Commerce MVC Project! This is a comprehensive e-commerce application built using ASP.NET MVC. It includes all the essential features needed for an online store and supports localization with Bangla as an additional language.
 
-✨ Features
+# ✨ Features
 🔐 User Registration and Login
 ✅ Form Validation
 🛍️ Product Display and Search
@@ -24,11 +25,13 @@ Welcome to the E-Commerce MVC Project! This is a comprehensive e-commerce applic
 📰 News Section
 🌐 Localization (English and Bangla)
 🛠️ Technologies Used
+
 ASP.NET MVC
 Entity Framework
 SQL Server
 Bootstrap
 jQuery
+
 🚀 Getting Started
 📋 Prerequisites
 Visual Studio 2019 or later
@@ -59,11 +62,11 @@ Press F5 to build and run the project.
 🌍 Localization
 The application supports English and Bangla. You can switch languages using the language selector in the top navigation bar.
 
-🤝 Contributing
+# 🤝 Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-📄 License
+# 📄 License
 This project is licensed under the MIT License.
 
-📧 Contact
+# 📧 Contact
 If you have any questions or suggestions, feel free to reach out to me at shefain3@gmail.com.
