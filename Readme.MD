@@ -1,72 +1,72 @@
 # E-Commerce MVC Project 🛒
 
-# 📋 Table of Contents
-  Overview
-  Features
-  Technologies Used
-  Getting Started
-  Prerequisites
-  Installation
-  Localization
-  Contributing
-  License
-  Contact
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Localization](#localization)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-# 📖 Overview
+## Overview
 Welcome to the E-Commerce MVC Project! This is a comprehensive e-commerce application built using ASP.NET MVC. It includes all the essential features needed for an online store and supports localization with Bangla as an additional language.
 
-# ✨ Features
-🔐 User Registration and Login
-✅ Form Validation
-🛍️ Product Display and Search
-🛒 Shopping Cart
-📦 Order Management
-🗣️ Testimonials
-📰 News Section
-🌐 Localization (English and Bangla)
-🛠️ Technologies Used
+## Features
+- 🔐 User Registration and Login
+- ✅ Form Validation
+- 🛍️ Product Display and Search
+- 🛒 Shopping Cart
+- 📦 Order Management
+- 🗣️ Testimonials
+- 📰 News Section
+- 🌐 Localization (English and Bangla)
 
-ASP.NET MVC
-Entity Framework
-SQL Server
-Bootstrap
-jQuery
+## Technologies Used
+- ASP.NET MVC
+- Entity Framework
+- SQL Server
+- Bootstrap
+- jQuery
 
-🚀 Getting Started
-📋 Prerequisites
-Visual Studio 2019 or later
-.NET Framework 4.7.2 or later
-SQL Server
-⚙️ Installation
-Clone the repository:
+## Getting Started
+### Prerequisites
+- Visual Studio 2019 or later
+- .NET Framework 4.7.2 or later
+- SQL Server
 
-sh
-Copy code
-git clone https://github.com/xisxus/Mvc_ECommerce_Project
-Open the project in Visual Studio:
+### Installation
+1. Clone the repository:
 
-Open the ecommerce-mvc.sln file in Visual Studio.
-Update the database connection string:
 
-In web.config, update the DefaultConnection connection string to point to your SQL Server instance.
-Run the database migrations:
+2. Open the project in Visual Studio:
+- Open the `ecommerce-mvc.sln` file in Visual Studio.
 
-Open the Package Manager Console in Visual Studio.
-Run the following command:
-sh
-Copy code
-Update-Database
-Build and run the project:
+3. Update the database connection string:
+- In `web.config`, update the `DefaultConnection` connection string to point to your SQL Server instance.
 
-Press F5 to build and run the project.
-🌍 Localization
-The application supports English and Bangla. You can switch languages using the language selector in the top navigation bar.
+4. Run the database migrations:
+- Open the Package Manager Console in Visual Studio.
+- Run the following command:
+  ```
+  Update-Database
+  ```
 
-# 🤝 Contributing
+5. Build and run the project:
+- Press `F5` to build and run the project.
+
+## Localization
+The application supports both English and Bangla languages. You can switch languages using the language selector in the top navigation bar.
+
+## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-# 📄 License
+## License
 This project is licensed under the MIT License.
 
-# 📧 Contact
+## Contact
 If you have any questions or suggestions, feel free to reach out to me at shefain3@gmail.com.
+
